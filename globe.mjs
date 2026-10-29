@@ -31,7 +31,9 @@ export class Globe {
   void main(){
    vec2 q=(gl_FragCoord.xy-center)/radius;float r2=dot(q,q);if(r2>1.)discard;
    float z=sqrt(max(0.,1.-r2));vec3 n=normalize(q.x*rightVector+q.y*upVector+z*viewVector);
-   float u=fract((atan(n.z,n.x)-spin)/6.28318530718+.5);float v=.5-asin(clamp(n.y,-1.,1.))/3.14159265359;
+   // East-positive map longitude: looking at Greenwich, east must be on the right.
+   // Reverse the texture coordinate, not the rotation phase or camera motion.
+   float u=fract((spin-atan(n.z,n.x))/6.28318530718+.5);float v=.5-asin(clamp(n.y,-1.,1.))/3.14159265359;
    vec3 surface=texture(mapTexture,vec2(u,v)).rgb;
    float cosine=dot(n,sun),daylight=smoothstep(-.004,.004,cosine);
    vec3 lit=surface*(.64+.36*sqrt(max(0.,cosine)));
@@ -80,7 +82,7 @@ export class Globe {
   c.save();c.beginPath();c.arc(this.cx,this.cy,this.radius,0,TAU);c.clip();
   if(this.options.grid){
    for(const lat of [-60,-30,0,30,60])this.parallel(c,lat,'#ffffff35',lat===0?1.1:.6);
-   for(let lon=0;lon<360;lon+=30){const a=lon*DEG+this.spin;this.curve(c,t=>[Math.cos(t)*Math.cos(a),Math.sin(t),Math.cos(t)*Math.sin(a)],'#ffffff30',.6)}
+   for(let lon=0;lon<360;lon+=30){const a=this.spin-lon*DEG;this.curve(c,t=>[Math.cos(t)*Math.cos(a),Math.sin(t),Math.cos(t)*Math.sin(a)],'#ffffff30',.6)}
   }
   if(this.options.polar)for(const lat of [-66.56,66.56])this.parallel(c,lat,'#e0e7f2bb',1.3,[4,4]);
   if(Math.abs(this.lat)<89.99)this.parallel(c,this.lat,'#bb86e8',2.8,[],'#ffce60');

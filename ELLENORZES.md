@@ -7,6 +7,7 @@
 - A pólusok megfelelő évszakban 0 vagy 24 órás állapotot kapnak. A napéjegyenlőség pontos határesete külön magyarázatot kap.
 - Független numerikus ellenőrzés: szélességi körönként 36 000 felszíni normális és a napirány skalárszorzatának előjele.
 - A WebGL tényleges képpontjai is ellenőrizve: északi nyáron a sarkkörön túli kör nappali, északi télen ugyanaz a kör éjszakai színezést kap.
+- A kontinensek kelet–nyugati tájolása külön képpontpróbával ellenőrizve: Közép-Afrika, Közép-Európa és Dél-Amerika szárazföldje, valamint három atlanti-óceáni hely megfelelő helyen jelenik meg. A korábbi forgásirány megmaradt.
 - Asztali és nagy pixelsűrűségű megjelenítés, 390 képpont széles mobilnézet: nincs vízszintes túlcsordulás.
 - Évszakgombok, szélességválasztók, lejátszás és szünet, forgatás, jelölések, súgó és alaphelyzet: kipróbálva, JavaScript-hiba nélkül.
 

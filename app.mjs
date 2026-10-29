@@ -1,5 +1,5 @@
 import {DEG,TILT,DAYS,epoch,clamp,mod,dateAt,solarLongitude,declination,daylight,seasons,hourText} from './solar.mjs';
-import {Globe} from './globe.mjs';
+import {Globe} from './globe.mjs?v=map-orientation-2';
 const $=id=>document.getElementById(id);
 const state={day:seasons[1].day,latitude:69.65,playing:false,spin:Math.PI/2};
 const monthNames=['jan.','febr.','márc.','ápr.','máj.','jún.','júl.','aug.','szept.','okt.','nov.','dec.'];
