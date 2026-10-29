@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="hu">
+<meta charset="utf-8"><link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Évszakok – térbeli modell – magyar változat</title>
+<style>
+html,body{margin:0;min-height:100%;background:#ededed;color:#333;font:14px Arial,sans-serif}main{width:min(100%,1000px);margin:24px auto}#simulator{width:100%;aspect-ratio:600.0/450.0;background:white}ruffle-player{width:100%;height:100%;display:block}footer{line-height:1.6;padding:12px 8px}a{color:#2255a0}#error{padding:20px;background:#fff3cd}button{font:inherit;cursor:pointer;float:right;padding:5px 12px}body.full main{width:100%;margin:0}body.full #simulator{height:calc(100vh - 60px);aspect-ratio:auto}
+</style>
+<main><div id="error" hidden></div><div id="simulator"></div>
+<footer><button id="large">Nagyítás</button>Évszakok – térbeli modell · Magyar adaptáció<br>Az eredeti SWF magyar feliratokkal, helyi Ruffle futtatókörnyezettel. Internetkapcsolat nem szükséges.</footer></main>
+<script>
+window.RufflePlayer={config:{autoplay:"on",unmuteOverlay:"hidden",backgroundColor:"#ffcc66",letterbox:"on",contextMenu:"off",allowScriptAccess:false,showSwfDownload:false,preferredRenderer:"canvas"}};
+document.getElementById('large').onclick=()=>{document.body.classList.toggle('full')};
+window.addEventListener('DOMContentLoaded',async()=>{
+const error=document.getElementById('error');
+if(location.protocol==='file:'){error.hidden=false;error.textContent='A szimulátort az inditas.cmd fájllal indítsd el. A böngésző a helyi fájlok közvetlen megnyitását korlátozza.';return;}
+try{const player=window.RufflePlayer.newest().createPlayer();document.getElementById('simulator').appendChild(player);await player.ruffle().load({url:'magyar.swf'});window.simulatorReady=true;}catch(e){error.hidden=false;error.textContent='Nem sikerült betölteni a szimulátort: '+e.message;}
+});
+</script><script src="ruffle/ruffle.js"></script>
+<style>
+#simulator{position:relative}.hu-label{position:absolute;pointer-events:none;box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:#bac6ee;background:#2b4077;font:clamp(10px,2vw,22px) Georgia,serif;line-height:1.1;text-align:center;padding:2px;left:4.9%;width:22.1%;height:5.6%;border-radius:5px}.hu-title{left:5.8%;top:1.7%;height:5.8%;width:21%;background:#ffd16a;color:#805127;font-style:italic;font-size:clamp(16px,3vw,30px)}.hu-help-button{position:absolute;left:74.7%;top:7.7%;width:4.8%;height:5.9%;border:0;border-radius:50%;background:#b92a35;color:#ffe09b;font:bold clamp(14px,2.4vw,25px) Georgia;cursor:pointer;box-shadow:inset 0 0 0 3px #b89041}.hu-help{position:absolute;z-index:3;inset:8% 8% 10%;padding:4%;background:#ffdc8c;color:#173454;border:3px solid #b38135;border-radius:12px;box-shadow:0 8px 30px #0007;overflow:auto;font:clamp(12px,1.8vw,19px)/1.5 Arial,sans-serif}.hu-help[hidden]{display:none}.hu-help h2{margin-top:0;font-size:1.4em}.hu-help button{float:right}
+</style>
+<script>
+window.addEventListener('DOMContentLoaded',()=>{
+const box=document.getElementById('simulator');
+for(const [label,top,cls] of [['Évszakok',1.7,'hu-title'],['Téli napforduló',11.1,''],['Tavaszi napéjegyenlőség',18.5,''],['Nyári napforduló',26.0,''],['Őszi napéjegyenlőség',33.5,'']]){const e=document.createElement('div');e.className='hu-label '+cls;e.style.top=top+'%';e.textContent=label;box.appendChild(e)}
+const help=document.createElement('section');help.className='hu-help';help.hidden=true;help.setAttribute('aria-label','Magyar útmutató');help.innerHTML='<button type="button">Bezárás</button><h2>Évszakok – útmutató</h2><p>A Nap, a Föld és a Hold térbeli modelljét látod. A Föld forgástengelyének iránya a Nap körüli keringés közben közel állandó marad. Emiatt változik a félgömbök megvilágítása és a nappal hossza.</p><p>A bal felső négy gombbal a két napfordulóhoz és a két napéjegyenlőséghez ugorhatsz. A jobb felső lejátszás/szünet gombbal megállíthatod és folytathatod az idő múlását. A nagyítóval válthatsz a teljes pálya és a Föld közeli nézete között.</p><p>A közeli nézetben húzással változtathatod a nézőpontot. Bal alul a párizsi nappalhossz látható, 0–24 órás skálán. Az időadatok helyi napidőre vonatkoznak.</p><p>Figyeld meg, melyik félgömb fordul jobban a Nap felé! Hasonlítsd össze a nyári és téli nappalhosszt, majd a napéjegyenlőségeket. A méretek, távolságok és időarányok szemléltető jellegűek.</p>';help.querySelector('button').onclick=()=>help.hidden=true;box.appendChild(help);
+const button=document.createElement('button');button.className='hu-help-button';button.textContent='?';button.setAttribute('aria-label','Magyar útmutató');button.onclick=()=>help.hidden=false;box.appendChild(button);
+});
+</script>
+
+</html>
